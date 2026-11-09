@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/tensor-decomposition.json",
+  "title": "Bilinear matrix-multiplication tensor decomposition",
+  "description": "An explicit rank-r bilinear algorithm for the matrix product of an m x k matrix by a k x n matrix, given as the three coefficient matrices u, v, w. This is a first attempt at the tensor-decomposition schema that is still missing alongside the format-rank table schema of fmm_digest; it is offered for discussion and is expected to change.",
+  "type": "object",
+  "required": ["dimensions", "rank", "scale", "layout", "u", "v", "w"],
+  "additionalProperties": false,
+  "properties": {
+    "dimensions": {
+      "description": "The ORDERED triple [m, k, n]: A is m x k, B is k x n, C = A B is m x n. Ordered, unlike the unordered format triple of the format-rank table, because u, v and w are written against a particular orientation.",
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1 },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "rank": {
+      "description": "Number r of bilinear products, equal to the number of rows of u, v and w. An upper bound on the tensor rank of the format, not a claim of minimality.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "scale": {
+      "description": "Positive integer s such that s * C_flat = w^T p. A decomposition over the integers with no common denominator has s = 1.",
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "layout": {
+      "description": "Flattening order used for the column indices of u, v and w. 'row-major' means A is indexed by i*k + j, B by j*n + l and C by i*n + l.",
+      "enum": ["row-major", "column-major"]
+    },
+    "ring": {
+      "description": "Ring the coefficients are taken from. Omitted means the integers.",
+      "type": "string",
+      "examples": ["Z", "Q", "Z/2", "Z[i]"]
+    },
+    "u": {
+      "description": "Left factor, r rows of length m*k, in the sparse row form below.",
+      "$ref": "#/$defs/sparseMatrix"
+    },
+    "v": {
+      "description": "Right factor, r rows of length k*n.",
+      "$ref": "#/$defs/sparseMatrix"
+    },
+    "w": {
+      "description": "Output factor, r rows of length m*n.",
+      "$ref": "#/$defs/sparseMatrix"
+    },
+    "provenance": {
+      "description": "Where the decomposition comes from, so that credit for component schemes is not lost when a decomposition is composed from published ones.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "description": "How the decomposition was obtained, in prose.",
+          "type": "string"
+        },
+        "components": {
+          "description": "Published schemes the decomposition is built from.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["format", "rank"],
+            "properties": {
+              "format": {
+                "type": "array",
+                "items": { "type": "integer", "minimum": 1 },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "rank": { "type": "integer", "minimum": 1 },
+              "multiplicity": {
+                "description": "How many times this component is used.",
+                "type": "integer",
+                "minimum": 1,
+                "default": 1
+              },
+              "author": { "type": "string" },
+              "reference": { "type": "string" }
+            }
+          }
+        },
+        "operations": {
+          "description": "Operations applied to the components, named so that a reader can reconstruct the count.",
+          "type": "array",
+          "items": {
+            "enum": ["direct-sum", "kronecker", "projection-along-mode",
+                     "serendipitous-product", "transposition", "permutation", "other"]
+          }
+        },
+        "count": {
+          "description": "The rank written out as the arithmetic of the component ranks, for example '2829 = 123 + 11*150 + 4*264'.",
+          "type": "string"
+        },
+        "contributor": {
+          "description": "The contributor's ORCID iD, in full URI or hyphenated form.",
+          "type": "string",
+          "pattern": "^(https://orcid\\.org/)?\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "verification": {
+      "description": "What was checked, and how, so that a reader can tell a fully verified entry from a reported one.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exactTensorIdentity": {
+          "description": "True only if EVERY coefficient of the matrix-multiplication tensor was checked exactly, including the zero coefficients.",
+          "type": "boolean"
+        },
+        "tensorCoefficientsChecked": {
+          "description": "Should equal (m*k) * (k*n) * (m*n) when exactTensorIdentity is true.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "distinctProducts": {
+          "description": "True if no row of u, v, w is zero and no pair (u_t, v_t) repeats, so the r products are genuinely distinct.",
+          "type": "boolean"
+        },
+        "randomProductTests": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arithmetic": {
+          "description": "Arithmetic the checks were carried out in. Floating point does not certify an exact identity.",
+          "enum": ["exact-integer", "modular", "floating-point"]
+        },
+        "checker": {
+          "description": "Pointer to the script that reproduces the checks.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sparseMatrix": {
+      "description": "A matrix as an array of r rows. A row is an array of [columnIndex, value] pairs with zero-based column indices; any index not listed is zero. Indices within a row should be distinct and ascending.",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "integer" }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    }
+  }
+}

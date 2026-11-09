@@ -1,0 +1,11 @@
+{
+  "description": "Proposed additions to fmm_sota.json: three verified upper bounds on the rank of small matrix-multiplication formats, two of which lower the value currently recorded in the table and one of which lies past the 32x32x32 limit of the table. Each entry is backed by explicit integer coefficient matrices in the tensorDecomposition directory of the repository named in 'source', together with a checker that verifies the full tensor identity.",
+  "source": "https://github.com/chandanshukla1989/fmm_decompositions",
+  "contributor": "https://orcid.org/0009-0008-0897-4332",
+  "createdAt": "2026-11-09T00:00:00",
+  "entries": [
+    { "format": [10,13,36], "rank": 2786, "exponent": 2.815872 },
+    { "format": [10,19,24], "rank": 2723, "exponent": 2.816409 },
+    { "format": [14,18,19], "rank": 2829, "exponent": 2.813713 }
+  ]
+}

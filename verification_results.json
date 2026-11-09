@@ -1,0 +1,178 @@
+[
+  {
+    "file": "10x13x36_rank2786.npz",
+    "format": [
+      10,
+      13,
+      36
+    ],
+    "multiplications": 2786,
+    "naive_multiplications": 4680,
+    "npz_keys": [
+      "scale",
+      "u",
+      "v",
+      "w"
+    ],
+    "stored_dtypes": [
+      "int8",
+      "int8",
+      "int8"
+    ],
+    "scale": 1,
+    "max_abs_coefficient": [
+      2,
+      2,
+      1
+    ],
+    "nonzeros": [
+      24052,
+      37116,
+      33098
+    ],
+    "distinct_input_form_pairs": 2786,
+    "a_priori_coefficient_bound": 11144,
+    "tensor_coefficients_checked": 21902400,
+    "exact_tensor_identity": true,
+    "exact_integer_matrix_products": 8,
+    "json_matches_npz": {
+      "u": true,
+      "v": true,
+      "w": true
+    },
+    "sha256": "d3378bd88e450985c607894fd7d1484a4893918d4942000c03bd22acfe7a4e44",
+    "verdict": "PASS"
+  },
+  {
+    "file": "10x19x24_rank2723.npz",
+    "format": [
+      10,
+      19,
+      24
+    ],
+    "multiplications": 2723,
+    "naive_multiplications": 4560,
+    "npz_keys": [
+      "scale",
+      "u",
+      "v",
+      "w"
+    ],
+    "stored_dtypes": [
+      "int64",
+      "int64",
+      "int64"
+    ],
+    "scale": 1,
+    "max_abs_coefficient": [
+      2,
+      2,
+      1
+    ],
+    "nonzeros": [
+      32175,
+      49257,
+      31690
+    ],
+    "distinct_input_form_pairs": 2723,
+    "a_priori_coefficient_bound": 10892,
+    "tensor_coefficients_checked": 20793600,
+    "exact_tensor_identity": true,
+    "exact_integer_matrix_products": 8,
+    "json_matches_npz": {
+      "u": true,
+      "v": true,
+      "w": true
+    },
+    "sha256": "d5c9ba6ff5d90c7d620fc74ec204508b350f63c79be36c08016ef51aa4e2751a",
+    "verdict": "PASS"
+  },
+  {
+    "file": "14x18x19_rank2829.npz",
+    "format": [
+      14,
+      18,
+      19
+    ],
+    "multiplications": 2829,
+    "naive_multiplications": 4788,
+    "npz_keys": [
+      "scale",
+      "u",
+      "v",
+      "w"
+    ],
+    "stored_dtypes": [
+      "int64",
+      "int64",
+      "int64"
+    ],
+    "scale": 1,
+    "max_abs_coefficient": [
+      1,
+      2,
+      2
+    ],
+    "nonzeros": [
+      37887,
+      40884,
+      42047
+    ],
+    "distinct_input_form_pairs": 2829,
+    "a_priori_coefficient_bound": 11316,
+    "tensor_coefficients_checked": 22924944,
+    "exact_tensor_identity": true,
+    "exact_integer_matrix_products": 8,
+    "json_matches_npz": {
+      "u": true,
+      "v": true,
+      "w": true
+    },
+    "sha256": "4a274b07d7327745e7133b90f71327149192fcf3cf97b13a8e3363c00bc2488c",
+    "verdict": "PASS"
+  },
+  {
+    "file": "14x19x18_rank2829.npz",
+    "format": [
+      14,
+      19,
+      18
+    ],
+    "multiplications": 2829,
+    "naive_multiplications": 4788,
+    "npz_keys": [
+      "scale",
+      "u",
+      "v",
+      "w"
+    ],
+    "stored_dtypes": [
+      "int64",
+      "int64",
+      "int64"
+    ],
+    "scale": 1,
+    "max_abs_coefficient": [
+      2,
+      2,
+      1
+    ],
+    "nonzeros": [
+      42047,
+      40884,
+      37887
+    ],
+    "distinct_input_form_pairs": 2829,
+    "a_priori_coefficient_bound": 11316,
+    "tensor_coefficients_checked": 22924944,
+    "exact_tensor_identity": true,
+    "exact_integer_matrix_products": 8,
+    "json_matches_npz": {
+      "u": true,
+      "v": true,
+      "w": true
+    },
+    "sha256": "b3f1decb5c3402ad5dd9322461cacd53bc278d29e48600cbd4b5e0b9e31f0760",
+    "verdict": "PASS"
+  }
+]
